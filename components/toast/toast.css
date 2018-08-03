@@ -1,0 +1,84 @@
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+.toast-notice-wrapper.notice-enter {
+    opacity: 0.01;
+    transform: translateX(-50%) scale(0);
+}
+
+.toast-notice-wrapper.notice-enter-active {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+    transition: all 300ms ease-out;
+}
+
+.toast-notice-wrapper.notice-exit {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.toast-notice-wrapper.notice-exit-active {
+    opacity: 0.01;
+    transform: translate(-50%, -100%);
+    transition: all 300ms ease-out;
+}
+
+.toast-notice {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    margin: auto;
+    transform: translateX(-50%);
+    padding: 16px 32px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, .1);
+    border-radius: 6px;
+    color: #454545;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.toast-notice>span {
+    margin-left: 6px;
+    line-height: 100%;
+}
+
+.toast-notice>svg {
+    font-size: 18px;
+}
+
+.toast-notice.info>svg {
+    color: #1890FF;
+}
+
+.toast-notice.success>svg {
+    color: #52C41A;
+}
+
+.toast-notice.warning>svg {
+    color: #FAAD14;
+}
+
+.toast-notice.error>svg {
+    color: #F74A53;
+}
+
+.toast-notice.loading>svg {
+    color: #1890FF;
+    animation: rotating 1s linear infinite;
+
+}
+
+@keyframes rotating {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
