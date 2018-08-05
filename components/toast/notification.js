@@ -19,7 +19,7 @@ class Notification extends Component {
         const { notices } = this.state
         notice.key = this.getNoticeKey()
         if (notices.every(item => item.key !== notice.key)) {
-            notices[0] = notice
+            notices.push(notice)
             this.setState({ notices })
             if (notice.duration > 0) {
                 setTimeout(() => {
@@ -31,15 +31,16 @@ class Notification extends Component {
     }
 
     removeNotice(key) {
-        this.setState(previousState => ({
-            notices: previousState.notices.filter((notice) => {
+        const { notices } = this.state
+        this.setState({
+            notices: notices.filter((notice) => {
                 if (notice.key === key) {
-                    if (notice.onClose) notice.onClose()
+                    if (notice.onClose) setTimeout(notice.onClose, this.transitionTime)
                     return false
                 }
                 return true
             })
-        }))
+        })
     }
 
     render() {
