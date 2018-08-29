@@ -46,3 +46,15 @@ Toast提供的函数调用后返回一个函数，调用这个函数可以立即
   - （可选） onClose 提示关闭时的回调函数
 - info、succcess、warning、error中duration的默认值为2000（2s后自动关闭），而loading的duration默认值为0（即默认不自动关闭）。
 
+
+## 组件依赖
+
+``` json
+{
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-transition-group": "^2.4.0"
+}
+```
+
+依赖版本仅供参考，推荐 react、 react-dom 版本 16.0 以上，react-transition-group 版本 2.0 以上。
