@@ -11,39 +11,43 @@ const DialogTypes = {
 }
 
 class Modal extends Component {
-    renderDialogForType(type) {
+    renderDialogForType(type, props) {
         switch (type) {
             case DialogTypes.ALERT:
-                return <Alert />
+                return <Alert {...props} />
             case DialogTypes.CONFIRM:
-                return <Confirm />
+                return <Confirm {...props} />
             case DialogTypes.PROMPT:
-                return <Prompt />
+                return <Prompt {...props} />
             default:
                 throw new Error('dialog type error')
         }
     }
 
     render() {
-        const { type } = this.props
-        return this.renderDialogForType(type)
+        const { type, contentText, onOk, onCancel } = this.props
+        return (
+            <div className="modal">
+                {this.renderDialogForType(type, { contentText, onOk, onCancel })}
+            </div>
+        )
     }
 }
 
-function popupDialog(type) {
+function popupDialog(params) {
     const div = document.createElement('div')
     document.body.appendChild(div)
-    ReactDOM.render(<Modal type={type} />, div)
+    ReactDOM.render(<Modal {...params} />, div)
 }
 
 export default {
-    alert() {
-        popupDialog(DialogTypes.ALERT)
+    alert(params) {
+        popupDialog({ type: DialogTypes.ALERT, ...params })
     },
-    confirm() {
-        popupDialog(DialogTypes.CONFIRM)
+    confirm(params) {
+        popupDialog({ type: DialogTypes.CONFIRM, ...params })
     },
-    prompt() {
-        popupDialog(DialogTypes.PROMPT)
+    prompt(params) {
+        popupDialog({ type: DialogTypes.PROMPT, ...params })
     }
 }
