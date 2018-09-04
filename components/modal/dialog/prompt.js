@@ -15,19 +15,21 @@ class Prompt extends Component {
         const { contentText, onOk, onCancel } = this.props
         const { enterContent } = this.state
         return (
-            <div className="modal-prompt">
-                {contentText}
+            <div className="modal-prompt dialog">
+                <h4>{contentText}</h4>
                 <input type="text" value={enterContent} onChange={this.handleChange} />
-                <button type="button" onClick={() => { onOk(enterContent) }}>
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-check-circle-fill" />
-                    </svg>
-                </button>
-                <button type="button" onClick={onCancel}>
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-close-circle-fill" />
-                    </svg>
-                </button>
+                <div className="button-wrapper">
+                    <button type="button" className="check" onClick={() => { if (onOk) onOk(enterContent) }}>
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-check-circle-fill" />
+                        </svg>
+                    </button>
+                    <button type="button" className="close" onClick={() => { if (onCancel) onCancel() }}>
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-close-circle-fill" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         )
     }
