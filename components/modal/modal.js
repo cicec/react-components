@@ -23,6 +23,14 @@ class Modal extends Component {
         this.setState({ showDialog: true })
     }
 
+    onClose(confirm, data) {
+        const { onOk, onCancel, removeDialog } = this.props
+        if (confirm && onOk) onOk(data)
+        else if (onCancel) onCancel()
+        setTimeout(removeDialog, this.transitionTime)
+        this.setState({ showDialog: false })
+    }
+
     renderDialogForType(type, props) {
         switch (type) {
             case DialogTypes.ALERT:
@@ -34,14 +42,6 @@ class Modal extends Component {
             default:
                 throw new Error('dialog type error')
         }
-    }
-
-    onClose(confirm, data) {
-        const { onOk, onCancel, removeDialog } = this.props
-        if (confirm && onOk) onOk(data)
-        else if (onCancel) onCancel()
-        setTimeout(removeDialog, this.transitionTime)
-        this.setState({ showDialog: false })
     }
 
     render() {
