@@ -15,6 +15,7 @@ class Modal extends Component {
     constructor() {
         super()
         this.onClose = this.onClose.bind(this)
+        this.transitionTime = 300
         this.state = { showDialog: false }
     }
 
@@ -39,7 +40,8 @@ class Modal extends Component {
         const { onOk, onCancel, removeDialog } = this.props
         if (confirm && onOk) onOk(data)
         else if (onCancel) onCancel()
-        removeDialog()
+        setTimeout(removeDialog, this.transitionTime)
+        this.setState({ showDialog: false })
     }
 
     render() {
@@ -51,7 +53,7 @@ class Modal extends Component {
                 <CSSTransition
                     in={showDialog}
                     classNames="dialog-wrapper"
-                    timeout={300}
+                    timeout={this.transitionTime}
                 >
                     {
                         this.renderDialogForType(type, {
