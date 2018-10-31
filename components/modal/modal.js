@@ -49,21 +49,27 @@ class Modal extends Component {
         const { onClose } = this
         const { showDialog } = this.state
         return (
-            <div className="modal">
-                <CSSTransition
-                    in={showDialog}
-                    classNames="dialog-wrapper"
-                    timeout={this.transitionTime}
-                >
-                    {
-                        this.renderDialogForType(type, {
-                            contentText,
-                            onOk(data) { onClose(true, data) },
-                            onCancel() { onClose(false) },
-                        })
-                    }
-                </CSSTransition>
-            </div>
+            <CSSTransition
+                in={showDialog}
+                classNames="modal-wrapper"
+                timeout={this.transitionTime}
+            >
+                <div className="modal">
+                    <CSSTransition
+                        in={showDialog}
+                        classNames="dialog-wrapper"
+                        timeout={this.transitionTime}
+                    >
+                        {
+                            this.renderDialogForType(type, {
+                                contentText,
+                                onOk(data) { onClose(true, data) },
+                                onCancel() { onClose(false) },
+                            })
+                        }
+                    </CSSTransition>
+                </div>
+            </CSSTransition>
         )
     }
 }

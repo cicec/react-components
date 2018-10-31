@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, .2);
+    background: rgba(0, 0, 0, .4);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,7 +85,7 @@
 .dialog-wrapper-enter-active {
     opacity: 1;
     transform: translateY(0);
-    transition: all 300ms ease-out;
+    transition: all 300ms;
 }
 
 .dialog-wrapper-exit {
@@ -93,9 +93,26 @@
     transform: translateY(0);
 }
 
-
 .dialog-wrapper-exit-active {
     opacity: 0.01;
     transform: translateY(-30%);
+    transition: all 300ms;
+}
+
+.modal-wrapper-enter {
+    background: rgba(0, 0, 0, 0);
+}
+
+.modal-wrapper-enter-active {
+    background: rgba(0, 0, 0, .4);
+    transition: all 300ms ease-out;
+}
+
+.modal-wrapper-exit {
+    background: rgba(0, 0, 0, .4);
+}
+
+.modal-wrapper-exit-active {
+    background: rgba(0, 0, 0, 0);
     transition: all 300ms ease-out;
 }
