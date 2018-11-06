@@ -72,10 +72,11 @@ class Notification extends Component {
 function createNotification() {
     const div = document.createElement('div')
     document.body.appendChild(div)
-    const notification = ReactDOM.render(<Notification />, div)
+    const ref = React.createRef()
+    ReactDOM.render(<Notification ref={ref} />, div)
     return {
         addNotice(notice) {
-            return notification.addNotice(notice)
+            return ref.current.addNotice(notice)
         },
         destroy() {
             ReactDOM.unmountComponentAtNode(div)
