@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import Notice from './notice'
 
@@ -19,8 +20,13 @@ class Notification extends Component {
         const { notices } = this.state
         notice.key = this.getNoticeKey()
         if (notices.every(item => item.key !== notice.key)) {
-            notices.push(notice)
-            this.setState({ notices })
+            if (notice.length > 0 && notices[notice.length - 1].type === 'loading') {
+                notices.push(notice)
+                setTimeout(() => { this.setState({ notices }) }, this.transitionTime)
+            } else {
+                notices.push(notice)
+                this.setState({ notices })
+            }
             if (notice.duration > 0) {
                 setTimeout(() => {
                     this.removeNotice(notice.key)
@@ -63,4 +69,19 @@ class Notification extends Component {
     }
 }
 
-export default Notification
+function createNotification() {
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    const notification = ReactDOM.render(<Notification />, div)
+    return {
+        addNotice(notice) {
+            return notification.addNotice(notice)
+        },
+        destroy() {
+            ReactDOM.unmountComponentAtNode(div)
+            document.body.removeChild(div)
+        }
+    }
+}
+
+export default createNotification()
