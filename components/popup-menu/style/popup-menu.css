@@ -4,13 +4,32 @@
 
 .popup-menu>ul {
     list-style: none;
-    padding: 16px;
+    padding: 6px 0;
     margin: 0;
+    box-shadow: 0 0 16px rgba(0, 0, 0, .1);
+    border-radius: 6px;
     position: absolute
 }
 
 .popup-menu.right>ul {
     top: 50%;
-    left: 100%;
+    left: calc(100% + 12px);
     transform: translateY(-50%);
+}
+
+.popup-menu>ul>li {
+    min-width: 54px;
+    padding: 9px 24px;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #232323;
+    font-size: 14px;
+    border-radius: 2px;
+    transition: all 150ms;
+}
+
+.popup-menu>ul>li:hover {
+    background: #2CA7F8;
+    color: #FAFAFA;
 }
