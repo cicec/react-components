@@ -1,31 +1,57 @@
 import React, { Component } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import './style/popup-menu.css'
 
 class PopupMenu extends Component {
     constructor() {
         super()
         this.triggers = { click: 'click', hover: 'hover', rightClick: 'right-click' }
-        this.placements = { top: 'top', buttom: 'bottom', left: 'left', right: 'right'}
-        this.popup = this.popup.bind(this)
-        this.state = { menu: null }
+        this.checkTrigger = this.checkTrigger.bind(this)
+        this.popupMenu = this.popupMenu.bind(this)
+        this.hideMenu = this.hideMenu.bind(this)
+        this.state = { showMenu: false }
     }
 
-    popup() {
-        const { items } = this.props
-        this.setState({ menu: items })
+    componentDidMount() {
+        document.addEventListener('click', this.hideMenu)
+    }
+
+    checkTrigger(event) {
+        const { trigger } = this.props
+        return trigger.some(item => item === event)
+    }
+
+    popupMenu(e) {
+        e.preventDefault()
+        e.nativeEvent.stopImmediatePropagation()
+        this.setState({ showMenu: true })
+    }
+
+    hideMenu() {
+        this.setState({ showMenu: false })
     }
 
     render() {
-        const { children, placement, trigger } = this.props
-        const { triggers, popup } = this
-        const { menu } = this.state
+        const { children, items, placement } = this.props
+        const { triggers, checkTrigger, popupMenu, handleMenuClick } = this
+        const { showMenu } = this.state
         return (
             <div
-                className="popup-menu right"
-                onClick={trigger.some(trigger => trigger === triggers.click) ? popup : null}
+                className="popup-menu"
+                onClick={checkTrigger(triggers.click) ? popupMenu : null}
+                onMouseOver={checkTrigger(triggers.hover) ? popupMenu : null}
+                onContextMenu={checkTrigger(triggers.rightClick) ? popupMenu : null}
             >
                 {children}
-                {menu}
+                <CSSTransition
+                    in={showMenu}
+                    classNames="menu-transition"
+                    timeout={300}
+                >
+                    <div className={`menu ${placement}`}>
+                        {showMenu ? items : null}
+                    </div>
+                </CSSTransition>
             </div>
         )
     }
