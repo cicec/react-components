@@ -1,0 +1,16 @@
+.popup-menu {
+    position: relative;
+}
+
+.popup-menu>ul {
+    list-style: none;
+    padding: 16px;
+    margin: 0;
+    position: absolute
+}
+
+.popup-menu.right>ul {
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+}
