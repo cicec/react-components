@@ -8,8 +8,6 @@
 
 ## 如何使用
 
-在组件顶部引入Toast即可直接使用：
-
 ``` js
 import Toast from './components/toast'
 
