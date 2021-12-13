@@ -4,7 +4,7 @@
 
 ## 效果预览
 
-- [点此预览](https://clancysong.github.io/react-components/dist/modal/)
+- [点此预览](https://cicec.github.io/react-components/dist/modal/)
 
 ## 如何使用
 
