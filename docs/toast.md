@@ -4,7 +4,7 @@
 
 ## 效果预览
 
-- [点此预览](https://clancysong.github.io/react-components/dist/toast/)
+- [点此预览](https://cicec.github.io/react-components/dist/toast/)
 
 ## 如何使用
 
